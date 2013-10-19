@@ -62,6 +62,7 @@ void TechnikaSong::play() {
                 printf("changing bpm to %f\n", bpm);
                 break;
             default:
+                printf("unknown command %x\n", cmd.type);
                 break;
         }
 
