@@ -1,6 +1,7 @@
-#include "TechnikaSong.hpp"
-
+#include <algorithm>
 #include <SDL.h>
+
+#include "TechnikaSong.hpp"
 
 TechnikaSong::TechnikaSong(const std::string &filename) {
     FILE *fp = fopen(filename.c_str(), "r");
@@ -124,5 +125,5 @@ void TechnikaSong::load_commands(FILE *fp) {
     } command_cmp;
 
     // Sort by position/deadline
-    sort(commands_.begin(), commands_.end(), command_cmp);
+    std::sort(commands_.begin(), commands_.end(), command_cmp);
 }

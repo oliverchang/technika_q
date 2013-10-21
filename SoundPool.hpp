@@ -7,8 +7,8 @@
 #include <utility>
 #include <memory>
 
-#include "al.h"
-#include "alc.h"
+#include <al.h>
+#include <alc.h>
 
 class SoundPool {
 public:

@@ -14,7 +14,6 @@ target_link_libraries(technika ${SNDFILE_LIBRARIES})
 # OpenAL
 if (APPLE)
     find_library(OPENAL_LIBRARY OpenAL)
-    target_link_libraries(technika ${OPENAL_LIBRARY})
 else (APPLE)
     find_library(OPENAL_LIBRARY
         NAMES OpenAL al openal
@@ -24,7 +23,10 @@ else (APPLE)
         /opt
         /opt/local)
 endif (APPLE)
-find_path(OPENAL_INCLUDE_DIR al.h)
+
+target_link_libraries(technika ${OPENAL_LIBRARY})
+find_path(OPENAL_INCLUDE_DIR al.h
+          PATH_SUFFIXES include/AL include/OpenAL include)
 
 # C++11 
 if (UNIX)
