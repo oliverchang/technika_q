@@ -1,6 +1,6 @@
 #include "TechnikaSong.hpp"
 
-#include <SFML/System.hpp>
+#include <SDL.h>
 
 TechnikaSong::TechnikaSong(const std::string &filename) {
     FILE *fp = fopen(filename.c_str(), "r");
@@ -16,7 +16,7 @@ void TechnikaSong::play() {
     float bpm = info_.initial_bpm;
     double multiplier = 1000.0 * (4.0 * 60.0 / bpm) / info_.positions_per_measure;
 
-    sf::Clock clock;
+    uint32_t start = SDL_GetTicks();
 
     // The last position and elapsed time when the BPM was changed
     uint32_t last_position = 0;
@@ -30,12 +30,12 @@ void TechnikaSong::play() {
 
         uint32_t elapsed;
         while (true) {
-            elapsed = clock.getElapsedTime().asMilliseconds();
+            elapsed = SDL_GetTicks() - start;
             if (elapsed >= deadline) {
                 break;
             } else {
                 // printf("sleeping for %u\n", deadline - elapsed);
-                sf::sleep(sf::milliseconds(deadline - elapsed));
+                SDL_Delay(deadline - elapsed);
             }
         }
 

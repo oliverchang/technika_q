@@ -7,7 +7,8 @@
 #include <utility>
 #include <memory>
 
-#include <SFML/Audio.hpp>
+#include "al.h"
+#include "alc.h"
 
 class SoundPool {
 public:
@@ -19,16 +20,21 @@ public:
 private:
     static const int MAX_SOUNDS = 256;
 
-    typedef std::list<sf::Sound>::iterator list_iterator;
+    typedef std::list<ALuint>::iterator list_iterator;
 
     // sound index -> (buffer, pointer to sound)
-    std::map<size_t, std::pair<std::shared_ptr<sf::SoundBuffer>, 
-                               list_iterator>> buffers_;
+    std::map<size_t, std::pair<ALuint, list_iterator>> buffers_;
 
     // LRU 
-    std::list<sf::Sound> sounds_;
+    std::list<ALuint> sounds_;
 
     void move_to_end(list_iterator it);
+
+    static bool openal_initialised;
+    static ALCdevice *device;
+    static ALCcontext *context;
+
+    void init_openal();
 };
 
 #endif
