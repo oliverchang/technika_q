@@ -1,3 +1,8 @@
 *.o
 *.swp
-play
+technika
+Makefile
+CMakeFiles
+CMakeCache.txt
+.DS_Store
+cmake_install.cmake
